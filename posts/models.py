@@ -12,6 +12,17 @@ class UserPostsModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True) 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # saving image = img -> store img in media dir following my specific folder name
+    # rendering image = return image address or dir
+    # path -> curr/ media/ specifi folder name -> media/user-posts/img_file_name
+    # localhost:8000/user/login/
+    # path("", include("app.urls")),
+    # localhost:8000/ media + image reference (folders + file_name)
+    # "media" + "img ref"
+    # domain + MEDIA_URL + MEDIA_ROOT
+    #         curr-path (BASE_DIR) + media + file_ref (desktop/django-class/project/social-media/projects/media/{file-name})
+    # localhost:8000/media/user-posts/screen-shot-2022-09-09:99393.png
+
 
 class UserSavedPostModel(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name="user_saved_posts_model_user")
