@@ -9,6 +9,7 @@ class UserPostsModel(models.Model):
     media = models.ImageField(upload_to="user-posts/",null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     likes = models.ManyToManyField(get_user_model(), related_name="users_post_model_likes", blank=True)
+    is_active = models.BooleanField(default=True, blank=True)
 
     updated_at = models.DateTimeField(auto_now=True) 
     created_at = models.DateTimeField(auto_now_add=True)

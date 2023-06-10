@@ -16,7 +16,7 @@
 
     {% comment %} Post Body {% endcomment %}
     
-    {% for obj in user_posts_query%}
+  
     <hr>
     <div class="post container">
       <div class="post-header">
@@ -25,9 +25,9 @@
           <span class="username">{{obj.user.username}}</span>
         </div>
         {%if request.user == obj.user%}
-        <p class="created-time">Posted on , {{obj.created_at}} <a href="{%url 'update_post' obj.id%}">Edit Post</a> <a href="{% url 'delete_post' obj.id%}">delete post</a>  <a href="{%url 'post_detail_view' obj.id%}">Post Detail</a></p>
+        <p class="created-time">Posted on , {{obj.created_at}} <a href="{%url 'update_post' obj.id%}">Edit Post</a> <a href="{% url 'delete_post' obj.id%}">delete post</a> </p>
         {% else %}
-        <p class="created-time">Posted on , {{obj.created_at}}  <a href="{%url 'post_detail_view' obj.id%}">Post Detail</a></p>
+        <p class="created-time">Posted on , {{obj.created_at}} </p>
         {% endif %}
         
       </div>
@@ -36,17 +36,19 @@
       <div class="post-content">
         <p class="image-description"></p>
         <p class="post-text">{{obj.description}}</p>
-  
+        <p class="post-text">{{likes_count}}</p>
         {%if request.user.is_authenticated%}
-        
-          <a href="{%url 'react_post_view' obj.id%}">react</a>
-        
+        {% if is_liked %}
+          <a href="{%url 'react_post_view' obj.id%}">unlike</a>
+        {% else %}
+        <a href="{%url 'react_post_view' obj.id%}">like</a>
+        {% endif %}
         {% endif%}
       </div>
     </div>
     
    <hr>
-   {% endfor %}
+   
 
     {%else%}
     

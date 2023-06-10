@@ -49,5 +49,7 @@ def delete_post(request, id):
     query = UserPostsModel.objects.get(id=id)
     if request.user != query.user:
         return HttpResponse("Only Post author can edit the POST")
-    query.delete()
+    query.is_active = False 
+    query.save()
+    # query.delete()
     return redirect("home_view")
