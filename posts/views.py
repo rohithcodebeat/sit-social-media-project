@@ -11,7 +11,7 @@ def create_post(request):
             print(request.POST)
             title = request.POST["title"]
             description = request.POST["description"]
-            media = request.POST["img"]
+            media = request.FILES["img"]
             user = request.user
             UserPostsModel.objects.create(
                 title = title,
@@ -19,6 +19,7 @@ def create_post(request):
                 media = media,
                 user = user 
             )
+            print(4)
 
         return render(request, "posts/create_post.html")
     except Exception as e:
