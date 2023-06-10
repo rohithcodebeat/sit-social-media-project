@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+# CRUD -> Create, Read, Update, Delete
 # Create your models here.
 class UserPostsModel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="user_posts_model_user")

@@ -1,5 +1,6 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth import login, logout, authenticate, get_user_model
+from posts.models import UserPostsModel
 
 def login_view(request):
     if request.method == "POST":
@@ -39,14 +40,18 @@ def register_view(request):
 
 def home_view(request):
     if request.user.is_authenticated:
+        user_posts_query = UserPostsModel.objects.all()
         context = {
             "username" : request.user.username,
-            "is_user_login" : True
+            "is_user_login" : True,
+            "user_posts_query" : user_posts_query
         }
     else:
+        
         context = {
             "username" : "UnAuthorized User",
-            "is_user_login" : False
+            "is_user_login" : False            
+
         }
     return render(request, "users/home.html", context)
 
